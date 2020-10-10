@@ -28,5 +28,12 @@ class Blog(models.Model):
     avatarBlog = models.ImageField(upload_to='images/') 
     timePost = models.DateTimeField(auto_now_add=True)
     updatedPost = models.DateTimeField(auto_now=True)
-
-    
+class Users(models.Model):
+    username = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+    FullName = models.CharField(max_length=100)
+    DOBUser = models.DateField()
+    emailUser = models.CharField(max_length=100)
+    phoneUser = models.CharField(max_length=12)
+    avatarUser = models.ImageField(upload_to='users')
+    statusUser = models.BooleanField(default=False)

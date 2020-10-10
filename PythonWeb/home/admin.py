@@ -10,7 +10,7 @@ class FoodAdmin (admin.ModelAdmin):
 class MasterChefAdmin(admin.ModelAdmin):
     list_display = ['nameChef','positionChef','selfIntroduceChef','avatarChef']
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ['nameBlog','posterBlog','titleBlog','contentBlog', 'avatarBlog']
+    list_display = ['nameBlog','posterBlog','titleBlog','contentBlog', 'avatarBlog', 'timePost','updatedPost']
 admin.site.register(Booking, BookingAdmin)
 admin.site.register(Food, FoodAdmin)
 admin.site.register(MasterChef, MasterChefAdmin)
