@@ -34,7 +34,14 @@
 					<p class="mb-0 phone"><span class="mailus">Phone no:</span> <a href="#">0965 062 715</a> or <span class="mailus">email us:</span> <a href="#">doanvietcntt99@gmail.com</a></p>
 				</div>
 				<div class="col-12 col-md d-flex justify-content-md-end">
-					<p class="mb-0">Mon - Fri / 9:00-21:00, Sat - Sun / 10:00-20:00</p>
+					<p class="mb-0">
+					{% if user.username %}
+						<p>Xin chào {{user.username}}</p>
+						<p><a href="/logout" url 'logout' %}">Đăng xuất</a></p>
+					{% else %}
+						<p><a href="/register" url 'register' %}">Đăng ký</a>|<a href="/login" url 'login' %}">Đăng nhập</a></p>
+					{% endif %}
+				</p>
 					<div class="social-media">
 						<p class="mb-0 d-flex">
 							<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
@@ -50,20 +57,18 @@
 	
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="index.html">Taste.<span>it</span></a>
+			<a class="navbar-brand" href="">Taste.<span>it</span></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
 			</button>
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-					<li class="nav-item"><a href="chef.html" class="nav-link">Chef</a></li>
+					<li class="nav-item active"><a href="" class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+					<li class="nav-item"><a href="/chef" class="nav-link">Chef</a></li>
 					<li class="nav-item"><a href="/menu" class="nav-link">Menu</a></li>
-					<li class="nav-item"><a href="reservation.html" class="nav-link">Reservation</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+					<li class="nav-item"><a href="/blog" class="nav-link">Blog</a></li>
 				</ul>
 			</div>
 		</div>
@@ -215,9 +220,9 @@
 							<h3>Breakfast</h3>
 						</div>
 						
-						{% for food in FastFood %}
+						{% for food in Breakfast %}
 						<div class="menus border-bottom-0 d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url({% static 'images/{{food.avatarFood}}}'%});"></div>
+							<div class="menu-img img" style="background-image: url({{food.avatarFood.url}});"></div>
 							<div class="text">
 								<div class="d-flex">
 									<div class="one-half">
@@ -242,6 +247,22 @@
 						<div class="heading-menu text-center ftco-animate">
 							<h3>Lunch</h3>
 						</div>
+						{% for food in Lunch %}
+						<div class="menus border-bottom-0 d-flex ftco-animate">
+							<div class="menu-img img" style="background-image: url({{food.avatarFood.url}});"></div>
+							<div class="text">
+								<div class="d-flex">
+									<div class="one-half">
+										<h3>{{food.nameFood}}</h3>
+									</div>
+									<div class="one-forth">
+										<span class="price">{{food.payFood}}</span>
+									</div>
+								</div>
+								<p>{{food.ingredientFood}}</p>
+							</div>
+						</div>
+						{% endfor %}
 						<span class="flat flaticon-pizza" style="left: 0;"></span>
 						<span class="flat flaticon-chicken" style="right: 0;"></span>
 					</div>
@@ -252,48 +273,22 @@
 						<div class="heading-menu text-center ftco-animate">
 							<h3>Dinner</h3>
 						</div>
-						<div class="menus d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url({% static 'images/dinner-1.jpg'%});"></div>
-							<div class="text">
-								<div class="d-flex">
-									<div class="one-half">
-										<h3>Beef Roast Source</h3>
-									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
-									</div>
-								</div>
-								<p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-							</div>
-						</div>
-						<div class="menus d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url({% static 'images/dinner-2.jpg'%});"></div>
-							<div class="text">
-								<div class="d-flex">
-									<div class="one-half">
-										<h3>Beef Roast Source</h3>
-									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
-									</div>
-								</div>
-								<p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-							</div>
-						</div>
+						{% for food in Dinner %}
 						<div class="menus border-bottom-0 d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url({% static 'images/dinner-3.jpg'%});"></div>
+							<div class="menu-img img" style="background-image: url({{food.avatarFood.url}});"></div>
 							<div class="text">
 								<div class="d-flex">
 									<div class="one-half">
-										<h3>Beef Roast Source</h3>
+										<h3>{{food.nameFood}}</h3>
 									</div>
 									<div class="one-forth">
-										<span class="price">$29</span>
+										<span class="price">${{food.payFood}}</span>
 									</div>
 								</div>
-								<p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+								<p>{{food.ingredientFood}}</p>
 							</div>
 						</div>
+						{% endfor %}
 						<span class="flat flaticon-omelette" style="left: 0;"></span>
 						<span class="flat flaticon-burger" style="right: 0;"></span>
 					</div>
@@ -305,48 +300,22 @@
 						<div class="heading-menu text-center ftco-animate">
 							<h3>Desserts</h3>
 						</div>
-						<div class="menus d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url({% static 'images/dessert-1.jpg'%});"></div>
-							<div class="text">
-								<div class="d-flex">
-									<div class="one-half">
-										<h3>Beef Roast Source</h3>
-									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
-									</div>
-								</div>
-								<p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-							</div>
-						</div>
-						<div class="menus d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url({% static 'images/dessert-2.jpg'%});"></div>
-							<div class="text">
-								<div class="d-flex">
-									<div class="one-half">
-										<h3>Beef Roast Source</h3>
-									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
-									</div>
-								</div>
-								<p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-							</div>
-						</div>
+						{% for food in Desserts %}
 						<div class="menus border-bottom-0 d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url({% static 'images/dessert-3.jpg'%});"></div>
+							<div class="menu-img img" style="background-image: url({{food.avatarFood.url}});"></div>
 							<div class="text">
 								<div class="d-flex">
 									<div class="one-half">
-										<h3>Beef Roast Source</h3>
+										<h3>{{food.nameFood}}</h3>
 									</div>
 									<div class="one-forth">
-										<span class="price">$29</span>
+										<span class="price">${{food.payFood}}</span>
 									</div>
 								</div>
-								<p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+								<p>{{food.ingredientFood}}</p>
 							</div>
 						</div>
+						{% endfor %}
 						<span class="flat flaticon-cupcake" style="left: 0;"></span>
 						<span class="flat flaticon-ice-cream" style="right: 0;"></span>
 					</div>
@@ -357,48 +326,22 @@
 						<div class="heading-menu text-center ftco-animate">
 							<h3>Wine Card</h3>
 						</div>
-						<div class="menus d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url({% static 'images/wine-1.jpg'%});"></div>
-							<div class="text">
-								<div class="d-flex">
-									<div class="one-half">
-										<h3>Beef Roast Source</h3>
-									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
-									</div>
-								</div>
-								<p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-							</div>
-						</div>
-						<div class="menus d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url({% static 'images/wine-2.jpg'%});"></div>
-							<div class="text">
-								<div class="d-flex">
-									<div class="one-half">
-										<h3>Beef Roast Source</h3>
-									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
-									</div>
-								</div>
-								<p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-							</div>
-						</div>
+						{% for food in WineCard %}
 						<div class="menus border-bottom-0 d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url({% static 'images/wine-3.jpg'%});"></div>
+							<div class="menu-img img" style="background-image: url({{food.avatarFood.url}});"></div>
 							<div class="text">
 								<div class="d-flex">
 									<div class="one-half">
-										<h3>Beef Roast Source</h3>
+										<h3>{{food.nameFood}}</h3>
 									</div>
 									<div class="one-forth">
-										<span class="price">$29</span>
+										<span class="price">${{food.payFood}}</span>
 									</div>
 								</div>
-								<p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+								<p>{{food.ingredientFood}}</p>
 							</div>
 						</div>
+						{% endfor %}
 						<span class="flat flaticon-wine" style="left: 0;"></span>
 						<span class="flat flaticon-wine-1" style="right: 0;"></span>
 					</div>
@@ -409,48 +352,22 @@
 						<div class="heading-menu text-center ftco-animate">
 							<h3>Drinks &amp; Tea</h3>
 						</div>
-						<div class="menus d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url({% static 'images/drink-1.jpg'%});"></div>
-							<div class="text">
-								<div class="d-flex">
-									<div class="one-half">
-										<h3>Beef Roast Source</h3>
-									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
-									</div>
-								</div>
-								<p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-							</div>
-						</div>
-						<div class="menus d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url({% static 'images/drink-2.jpg'%});"></div>
-							<div class="text">
-								<div class="d-flex">
-									<div class="one-half">
-										<h3>Beef Roast Source</h3>
-									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
-									</div>
-								</div>
-								<p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-							</div>
-						</div>
+						{% for food in DrinkTea %}
 						<div class="menus border-bottom-0 d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url({% static 'images/drink-3.jpg'%});"></div>
+							<div class="menu-img img" style="background-image: url({{food.avatarFood.url}});"></div>
 							<div class="text">
 								<div class="d-flex">
 									<div class="one-half">
-										<h3>Beef Roast Source</h3>
+										<h3>{{food.nameFood}}</h3>
 									</div>
 									<div class="one-forth">
-										<span class="price">$29</span>
+										<span class="price">${{food.payFood}}</span>
 									</div>
 								</div>
-								<p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+								<p>{{food.ingredientFood}}</p>
 							</div>
 						</div>
+						{% endfor %}
 						<span class="flat flaticon-wine" style="left: 0;"></span>
 						<span class="flat flaticon-wine-1" style="right: 0;"></span>
 					</div>
@@ -557,14 +474,15 @@
 				</div>
 			</div>	
 			<div class="row">
+				{% for chef in DataChef %}
 				<div class="col-md-6 col-lg-3 ftco-animate">
 					<div class="staff">
-						<div class="img" style="background-image: url({% static 'images/chef-4.jpg'%});"></div>
+						<div class="img" style="background-image: url({{chef.avatarChef.url}});"></div>
 						<div class="text px-4 pt-2">
-							<h3>John Gustavo</h3>
-							<span class="position mb-2">CEO, Co Founder</span>
+							<h3>{{chef.nameChef}}</h3>
+							<span class="position mb-2">{{chef.positionChef}}</span>
 							<div class="faded">
-								<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
+								<p>{{chef.selfIntroduceChef}}</p>
 								<ul class="ftco-social d-flex">
 									<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
 									<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -575,60 +493,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6 col-lg-3 ftco-animate">
-					<div class="staff">
-						<div class="img" style="background-image: url({% static 'images/chef-2.jpg'%});"></div>
-						<div class="text px-4 pt-2">
-							<h3>Michelle Fraulen</h3>
-							<span class="position mb-2">Head Chef</span>
-							<div class="faded">
-								<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-								<ul class="ftco-social d-flex">
-									<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-									<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-									<li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-									<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 ftco-animate">
-					<div class="staff">
-						<div class="img" style="background-image: url({% static 'images/chef-3.jpg'%});"></div>
-						<div class="text px-4 pt-2">
-							<h3>Alfred Smith</h3>
-							<span class="position mb-2">Chef Cook</span>
-							<div class="faded">
-								<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-								<ul class="ftco-social d-flex">
-									<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-									<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-									<li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-									<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 ftco-animate">
-					<div class="staff">
-						<div class="img" style="background-image: url({% static 'images/chef-1.jpg'%});"></div>
-						<div class="text px-4 pt-2">
-							<h3>Antonio Santibanez</h3>
-							<span class="position mb-2">Chef Cook</span>
-							<div class="faded">
-								<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
-								<ul class="ftco-social d-flex">
-									<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-									<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-									<li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-									<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
+				{%endfor%}
 			</div>
 		</div>
 	</section>
@@ -673,8 +538,9 @@
 								<div><a href="#">{{blog.posterBlog}}</a></div>
 							</div>
 							<h3 class="heading"><a href="#">{{blog.titleBlog}}</a></h3>
+
 							<p class="clearfix">
-								<a href="#" class="float-left read btn btn-primary">Read more</a>
+								<a href="/blog/{{blog.id}}" class="float-left read btn btn-primary">Read more</a>
 								<a href="#" class="float-right meta-chat"><span class="fa fa-comment"></span> 3</a>
 							</p>
 						</div>

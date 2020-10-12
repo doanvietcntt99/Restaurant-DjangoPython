@@ -7,6 +7,8 @@ class BookingAdmin(admin.ModelAdmin):
     search_fields = ['phoneBooking']
 class FoodAdmin (admin.ModelAdmin):
     list_display = ['nameFood','ingredientFood','payFood','avatarFood','nameTypeFood']
+    list_filter = ['nameTypeFood']
+    search_fields = ['nameFood']
 class MasterChefAdmin(admin.ModelAdmin):
     list_display = ['nameChef','positionChef','selfIntroduceChef','avatarChef']
 class BlogAdmin(admin.ModelAdmin):
