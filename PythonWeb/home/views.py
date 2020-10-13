@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Food, Blog, MasterChef
-from .forms import RegistrationForm
+from .forms import *
 def listBlog(request):
     Data = {'Blogs': Blog.objects.all()}
     
@@ -9,7 +9,13 @@ def listFood(request):
     Data = {'Foods': Foods.objects.all()}
 # Create your views here.
 def home(request):
-    return render(request, 'pages/home.html',{'Blogs': Blog.objects.all(), 'Breakfast': Food.objects.all().filter(nameTypeFood= "BREAKFAST"), 'Dinner':Food.objects.all().filter(nameTypeFood= "DINNER"), 'Desserts':Food.objects.all().filter(nameTypeFood= "DESSERTS"),'WineCard':Food.objects.all().filter(nameTypeFood= "WINECARD"),'DrinkTea':Food.objects.all().filter(nameTypeFood= "DRINKTEA"), 'DataChef':MasterChef.objects.all(), 'Lunch':Food.objects.all().filter(nameTypeFood= "LUNCH")})
+    form = BookingForm()
+    if request.method == 'POST':
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(request.path)
+    return render(request, 'pages/home.html',{'form': form, 'Blogs': Blog.objects.all(), 'Breakfast': Food.objects.all().filter(nameTypeFood_id= 1), 'Dinner':Food.objects.all().filter(nameTypeFood_id= 3), 'Desserts':Food.objects.all().filter(nameTypeFood_id=4),'WineCard':Food.objects.all().filter(nameTypeFood_id= 5),'DrinkTea':Food.objects.all().filter(nameTypeFood_id= 6), 'DataChef':MasterChef.objects.all(), 'Lunch':Food.objects.all().filter(nameTypeFood_id= 2)})
 def menu(request):
     return render(request, 'pages/menu.html')
 def chef(request):
@@ -35,3 +41,12 @@ def register(request):
     return render(request, 'pages/register.html', {'form': form})
 def login(request):
     return render(request, 'pages/login-2.html')
+def post(request, pk):
+    post = get_object_or_404(Blog, pk=pk)
+    form = CommentForm()
+    if request.method == "POST":
+        form = CommentForm(request.POST, author=request.user, post=post)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(request.path)
+    return render(request, "pages/blogsingle.html", {"post": post, "form": form, 'BlogSingle': Blog.objects.get(id=pk)})

@@ -1,59 +1,58 @@
 <!DOCTYPE html>
 <html>
-    <head>
-		{% load static %}
-        <title>EPU - Đăng Nhập</title>
-        <link rel="stylesheet" type="text/css" href="{% static 'css/login.css'%}">
-        <!--<link href="css/animate.css" rel="stylesheet" type="text/css"/>-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
-        <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/a81368914c.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-		
-        <img class="wave" src="{% static 'images/login/wave.png'%}">
-        <div class="container">
-            <div class="img">
-                <img class="animate__animated animate__backInUp" src="{% static 'images/login/bg.svg'%}">
-            </div>
-            <div class="login-content ">
-                <form method="POST">
-                    <div class ="animate__animated animate__backInDown">
-                        <img  src="{% static 'images/login/avatar.svg'%}">
-                        <h2 class="title">Welcome</h2>
-                    </div>
-                    <div class="animate__animated animate__backInUp">
-                        <div class="input-div one">
-                            <div class="i">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <div class="div">
-                                <h5>Tài Khoản</h5>
-                                {{form.username}}
-                            </div>
-                        </div>
-                        <div class="input-div pass">
-                            <div class="i"> 
-                                <i class="fas fa-lock"></i>
-                            </div>
-                            <div class="div">
-                                <h5>Mật Khẩu</h5>
-                                {{form.password}}
-                            </div>
-                        
-                    </div>
-                    <a href="/register">Quên Mật Khẩu?</a>
-                    {% csrf_token %}
-                    {% for key, value in form.errors.items %}
-                        {{value}}
-                    {% endfor %}
-                    <input type="submit"  class="btn" value="Đăng nhập"/>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <script type="text/javascript" src="{% static 'js/login.js'%}"></script>
-    </body>
-</html>
 
+<head>
+    {% load static %}
+    <title>EPU - Đăng Nhập</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css'%}">
+    <!--<link href="css/animate.css" rel="stylesheet" type="text/css"/>-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+    <img class="wave" src="{% static 'images/login/wave.png'%}">
+    <div class="container">
+        <div class="img">
+            <img class="animate__animated animate__backInUp" src="{% static 'images/login/bg.svg'%}">
+        </div>
+        <div class="login-content ">
+            <form method="POST">
+                <div class="animate__animated animate__backInDown">
+                    <img src="{% static 'images/login/avatar.svg'%}">
+                    <h2 class="title">Welcome</h2>
+                </div>
+                <div class="animate__animated animate__backInUp">
+                    <div class="input-div one">
+                        <div class="i">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="div">
+                            <h5>Tài Khoản</h5>
+                            {{form.username}}
+                        </div>
+                    </div>
+                    <div class="input-div pass">
+                        <div class="i">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="div">
+                            <h5>Mật Khẩu</h5>
+                            {{form.password}}
+                        </div>
+
+                    </div>
+                    <a href="/register">Quên Mật Khẩu?</a> {% csrf_token %} {% for key, value in form.errors.items %} {{value}} {% endfor %}
+                    <input type="hidden" name="next" value="/" />
+                    <input type="submit" class="btn" value="Đăng nhập" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="{% static 'js/login.js'%}"></script>
+</body>
+
+</html>

@@ -13,7 +13,16 @@ class MasterChefAdmin(admin.ModelAdmin):
     list_display = ['nameChef','positionChef','selfIntroduceChef','avatarChef']
 class BlogAdmin(admin.ModelAdmin):
     list_display = ['nameBlog','posterBlog','titleBlog','contentBlog', 'avatarBlog', 'timePost','updatedPost']
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['post','author','body','date']
+    search_fields = ['author']
+    list_filter = ['post']
+class TypeFoodAdmin(admin.ModelAdmin):
+    list_display = ['nameTypeFood']
+    search_fields = ['nameTypeFood']
 admin.site.register(Booking, BookingAdmin)
 admin.site.register(Food, FoodAdmin)
 admin.site.register(MasterChef, MasterChefAdmin)
 admin.site.register(Blog, BlogAdmin)
+admin.site.register(Comment, CommentAdmin)
+admin.site.register(TypeFood, TypeFoodAdmin)
