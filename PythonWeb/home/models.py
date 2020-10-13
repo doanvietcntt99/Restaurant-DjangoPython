@@ -8,7 +8,7 @@ class Booking(models.Model):
     nameBooking = models.CharField(max_length=100)
     emailBooking = models.CharField(max_length=100)
     phoneBooking = models.CharField(max_length=12)
-    checkInBooking = models.DateTimeField()
+    checkInBooking = models.DateField()
     timeBooking = models.TimeField() 
     def __str__(self):
         return self.nameBooking

@@ -1,8 +1,7 @@
 from django import forms
 import re
 from django.contrib.auth.models import User
-from .models import Booking
-from .models import Comment
+from .models import *
 class RegistrationForm(forms.Form):
     username = forms.CharField(label='Tài khoản', max_length=30)
     email = forms.EmailField(label='Email')
@@ -28,26 +27,20 @@ class RegistrationForm(forms.Form):
         raise forms.ValidationError("Tài khoản đã tồn tại")
     def save(self):
         User.objects.create_user(username=self.cleaned_data['username'], email=self.cleaned_data['email'], password=self.cleaned_data['password1'])
-class BookingForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        self.nameBooking = kwargs.pop('nameBooking', None)
-        self.emailBooking = kwargs.pop('emailBooking', None)
-        self.phoneBooking = kwargs.pop('phoneBooking', None)
-        self.checkInBooking = kwargs.pop('checkInBooking', None)
-        self.timeBooking = kwargs.pop('timeBooking', None)
-        super().__init__(*args, **kwargs)
-    def save(self, commit=True):
-        Booking = super().save(commit=False)
-        Booking.nameBooking = self.nameBooking
-        Booking.emailBooking = self.emailBooking
-        Booking.phoneBooking = self.phoneBooking
-        Booking.checkInBooking = self.checkInBooking
-        Booking.timeBooking = self.timeBooking
-        Booking.save()
-    class Meta:
-        model = Booking
-        fields = ["nameBooking","emailBooking","phoneBooking","checkInBooking", "timeBooking"]
-
+class BookingForm(forms.Form):
+    nameBooking = forms.CharField(label='Họ Và Tên', max_length=30)
+    emailBooking = forms.CharField(label='Email', max_length=30)
+    phoneBooking = forms.CharField(label='Số Điện Thoại', max_length=30)
+    checkInBooking = forms.DateField(label='Ngày')
+    timeBooking = forms.TimeField(label='Thời gian')
+    def save(self):
+        a = Booking()
+        a.nameBooking = self.cleaned_data['nameBooking']
+        a.emailBooking = self.cleaned_data['emailBooking']
+        a.phoneBooking = self.cleaned_data['phoneBooking']
+        a.checkInBooking = self.cleaned_data['checkInBooking']
+        a.timeBooking = self.cleaned_data['timeBooking']
+        a.save()
 class CommentForm (forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.author = kwargs.pop('author', None)
