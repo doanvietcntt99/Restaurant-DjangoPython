@@ -46,7 +46,7 @@
 
                     </div>
                     <a href="/register">Quên Mật Khẩu?</a> {% csrf_token %} {% for key, value in form.errors.items %} {{value}} {% endfor %}
-                    <input type="hidden" name="next" value="/" />
+                    <input type="hidden" name="next" value="/home" />
                     <input type="submit" class="btn" value="Đăng nhập" />
                 </div>
             </form>

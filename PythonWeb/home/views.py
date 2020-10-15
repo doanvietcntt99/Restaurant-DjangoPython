@@ -17,7 +17,21 @@ def home(request):
             return HttpResponseRedirect(request.path)
     return render(request, 'pages/home.html',{'form': form, 'Blogs': Blog.objects.all(), 'Breakfast': Food.objects.all().filter(nameTypeFood_id= 1), 'Dinner':Food.objects.all().filter(nameTypeFood_id= 3), 'Desserts':Food.objects.all().filter(nameTypeFood_id=4),'WineCard':Food.objects.all().filter(nameTypeFood_id= 5),'DrinkTea':Food.objects.all().filter(nameTypeFood_id= 6), 'DataChef':MasterChef.objects.all(), 'Lunch':Food.objects.all().filter(nameTypeFood_id= 2)})
 def menu(request):
-    return render(request, 'pages/menu.html')
+    form = BookingForm()
+    if request.method == 'POST':
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(request.path)
+    return render(request, 
+                'pages/menu.html',{
+                    'form': form, 
+                    'Breakfast': Food.objects.all().filter(nameTypeFood_id= 1), 
+                    'Dinner':Food.objects.all().filter(nameTypeFood_id= 3), 
+                    'Desserts':Food.objects.all().filter(nameTypeFood_id=4),
+                    'WineCard':Food.objects.all().filter(nameTypeFood_id= 5),
+                    'DrinkTea':Food.objects.all().filter(nameTypeFood_id= 6), 
+                    'Lunch':Food.objects.all().filter(nameTypeFood_id= 2)})
 def chef(request):
     DataChef = {'Chefs': MasterChef.objects.all()}
     return render(request, 'pages/chef.html', DataChef)

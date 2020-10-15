@@ -4,12 +4,14 @@ from django.conf import settings
 
 class TypeFood(models.Model):
     nameTypeFood =  models.CharField(max_length=100)
+
 class Booking(models.Model):
     nameBooking = models.CharField(max_length=100)
     emailBooking = models.CharField(max_length=100)
     phoneBooking = models.CharField(max_length=12)
     checkInBooking = models.DateField()
     timeBooking = models.TimeField() 
+    numberOfGuest = models.IntegerField(default=0)
     def __str__(self):
         return self.nameBooking
 class Food(models.Model):

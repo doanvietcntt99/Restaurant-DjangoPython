@@ -33,6 +33,7 @@ class BookingForm(forms.Form):
     phoneBooking = forms.CharField(label='Số Điện Thoại', max_length=30)
     checkInBooking = forms.DateField(label='Ngày')
     timeBooking = forms.TimeField(label='Thời gian')
+    numberOfGuest = forms.IntegerField(label = 'Số Người')
     def save(self):
         a = Booking()
         a.nameBooking = self.cleaned_data['nameBooking']

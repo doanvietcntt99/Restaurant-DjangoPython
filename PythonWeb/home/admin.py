@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import *
 # Register your models here.
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ['nameBooking', 'emailBooking', 'phoneBooking', 'checkInBooking', 'timeBooking']
+    list_display = ['nameBooking', 'emailBooking', 'phoneBooking', 'checkInBooking', 'timeBooking', 'numberOfGuest']
     list_filter = ['checkInBooking']
     search_fields = ['phoneBooking']
 class FoodAdmin (admin.ModelAdmin):
