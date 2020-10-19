@@ -207,8 +207,29 @@ textarea {
 
 button,
 input {
-  overflow: visible; }
-
+  overflow: visible;
+  background-color: red;
+  color: white;
+ }
+input[type="text"],input[type="email"],input[type="number"], input[type="date"], input[type="time"]
+{
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-weight: 400;
+  line-height: 1.5;
+  background: transparent !important;
+  font-size: 14px;
+  border-radius: 2px;
+  box-shadow: none !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+::placeholder
+{
+  color: white!important;
+}
 button,
 select {
   text-transform: none; }
@@ -246,7 +267,9 @@ input[type="checkbox"] {
 
 textarea {
   overflow: auto;
-  resize: vertical; }
+  resize: vertical; 
+  height: inherit !important;
+  width: 100%;}
 
 fieldset {
   min-width: 0;
@@ -453,13 +476,16 @@ pre {
       max-width: 540px; } }
   @media (min-width: 768px) {
     .container {
-      max-width: 720px; } }
+      max-width: 720px; }
+    
+    }
   @media (min-width: 992px) {
     .container {
       max-width: 960px; } }
   @media (min-width: 1200px) {
     .container {
-      max-width: 1140px; } }
+      max-width: 1140px; }
+     }
 
 .container-fluid, .container-sm, .container-md, .container-lg, .container-xl {
   width: 100%;
@@ -1750,6 +1776,10 @@ pre {
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch; }
+    input[type="text"]
+    {
+      width: 300px;
+    }
     .table-responsive-xl > .table-bordered {
       border: 0; } }
 

@@ -20,9 +20,14 @@ class CommentAdmin(admin.ModelAdmin):
 class TypeFoodAdmin(admin.ModelAdmin):
     list_display = ['nameTypeFood']
     search_fields = ['nameTypeFood']
+class UserAdmin(admin.ModelAdmin):
+    list_display = ['usernameUser','fullnameUser','dobUser','emailUser','addressUSer','phoneUser','avatarUser','statusUser']
+    search_fields = ['fullnameUser']
+    list_filter = ['statusUser']
 admin.site.register(Booking, BookingAdmin)
 admin.site.register(Food, FoodAdmin)
 admin.site.register(MasterChef, MasterChefAdmin)
 admin.site.register(Blog, BlogAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(TypeFood, TypeFoodAdmin)
+admin.site.register(User, UserAdmin)

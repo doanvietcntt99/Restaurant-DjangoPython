@@ -1,20 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    {% load static %}
+    <title>EPU - Đăng Ký</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css'%}">
+    <!--<link href="css/animate.css" rel="stylesheet" type="text/css"/>-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
-    <center>
-        <form action="." method="POST">
-            {% csrf_token %} {{form.as_p}}
-            <input type="submit" value="Đăng ký" />
-        </form>
-    </center>
+
+    <img class="wave" src="{% static 'images/login/wave.png'%}">
+    <div class="container">
+        <div class="img">
+            <img class="animate__animated animate__backInUp" src="{% static 'images/login/bg.svg'%}">
+        </div>
+        <div class="login-content ">
+            <form method="POST">
+                <div class="animate__animated animate__backInDown">
+                    <img src="{% static 'images/login/avatar.svg'%}">
+                    <h2 class="title">Welcome</h2>
+                </div>
+                <div class="animate__animated animate__backInUp">
+                    <div class="input-div one">
+                        <div class="i">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="div">
+                            {{form.usernameUser}}
+                        </div>
+                    </div>
+                    <div class="input-div pass">
+                        <div class="i">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="div">
+                            {{form.passwordUser}}
+                        </div>
+                    </div>
+                    <div class="input-div pass">
+                        <div class="i">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="div">
+                            {{form.rePasswordUser}}
+                        </div>
+                    </div>
+                    <div class="input-div one">
+                        <div class="i">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="div">
+                            {{form.fullnameUser}}
+                        </div>
+                    </div>
+                    <div class="input-div one">
+                        <div class="i">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="div">
+                            {{form.phoneUser}}
+                        </div>
+                    </div>
+                    <div class="input-div one">
+                        <div class="i">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="div">
+                            {{form.emailUser}}
+                        </div>
+                    </div>
+                    <a href="/register">Quên Mật Khẩu?</a> {% csrf_token %} {% for key, value in form.errors.items %} {{value}} {% endfor %}
+                    <input type="hidden" name="next" value="/login" />
+                    <input type="submit" class="btn" value="Đăng Ký" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="{% static 'js/login.js'%}"></script>
 </body>
 
 </html>

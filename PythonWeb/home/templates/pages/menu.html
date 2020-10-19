@@ -35,8 +35,9 @@
                     <p class="mb-0 phone"><span class="mailus">Phone no:</span> <a href="#">+00 1234 567</a> or <span class="mailus">email us:</span> <a href="#">emailsample@email.com</a></p>
                 </div>
                 <div class="col-12 col-md d-flex justify-content-md-end">
-                    <p class="mb-0">{% if user.username %}
-                        <p>Xin chào {{user.username}}</p>
+                    <p class="mb-0">
+						{% if user != None %}
+                        <p>Xin chào {{user.fullnameUser}} </p>
                         <p><a href="/logout" url 'logout' %} ">Đăng xuất</a></p>
 					{% else %}
 						<p><a href="/register " url 'register' %}">Đăng ký</a>|<a href="/login" url 'login' %} ">Đăng nhập</a></p>

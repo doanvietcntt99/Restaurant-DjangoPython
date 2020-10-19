@@ -4,7 +4,20 @@ from django.conf import settings
 
 class TypeFood(models.Model):
     nameTypeFood =  models.CharField(max_length=100)
-
+    def __str__(self):
+        return self.nameTypeFood
+class User(models.Model):
+    usernameUser =models.CharField(max_length=100, unique=True)
+    passwordUser = models.CharField(max_length=100)
+    fullnameUser = models.CharField(max_length=100)
+    dobUser = models.DateField()
+    emailUser = models.CharField(max_length=100)
+    addressUSer = models.CharField(max_length=100)
+    phoneUser = models.CharField(max_length=12)
+    avatarUser = models.ImageField(upload_to='images/users/')
+    statusUser = models.BooleanField(default=True)
+    def __str__(self):
+        return self.fullnameUser
 class Booking(models.Model):
     nameBooking = models.CharField(max_length=100)
     emailBooking = models.CharField(max_length=100)
@@ -33,17 +46,10 @@ class Blog(models.Model):
     avatarBlog = models.ImageField(upload_to='images/blogs/') 
     timePost = models.DateTimeField(auto_now_add=True)
     updatedPost = models.DateTimeField(auto_now=True)
-class Users(models.Model):
-    username = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
-    FullName = models.CharField(max_length=100)
-    DOBUser = models.DateField()
-    emailUser = models.CharField(max_length=100)
-    phoneUser = models.CharField(max_length=12)
-    avatarUser = models.ImageField(upload_to='images/users')
-    statusUser = models.BooleanField(default=False)
+    def __str__(self):
+        return self.nameBlog
 class Comment(models.Model):
     post = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments')
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
     date = models.DateTimeField(auto_now_add=True)

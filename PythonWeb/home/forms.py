@@ -2,38 +2,20 @@ from django import forms
 import re
 from django.contrib.auth.models import User
 from .models import *
-class RegistrationForm(forms.Form):
-    username = forms.CharField(label='Tài khoản', max_length=30)
-    email = forms.EmailField(label='Email')
-    password1 = forms.CharField(label='Mật khẩu', widget=forms.PasswordInput())
-    password2 = forms.CharField(label='Nhập lại mật khẩu', widget=forms.PasswordInput())
+import hashlib
 
-    def clean_password2(self):
-        if 'password1' in self.cleaned_data:
-            password1 = self.cleaned_data['password1']
-            password2 = self.cleaned_data['password2']
-            if password1 == password2 and password1:
-                return password2
-        raise forms.ValidationError("Mật khẩu không hợp lệ")
+def encrypt_string(hash_string):
+    sha_signature = \
+        hashlib.sha256(hash_string.encode()).hexdigest()
+    return sha_signature
 
-    def clean_username(self):
-        username = self.cleaned_data['username']
-        if not re.search(r'^\w+$', username):
-            raise forms.ValidationError("Tên tài khoản có kí tự đặc biệt")
-        try:
-            User.objects.get(username=username)
-        except User.DoesNotExist:
-            return username
-        raise forms.ValidationError("Tài khoản đã tồn tại")
-    def save(self):
-        User.objects.create_user(username=self.cleaned_data['username'], email=self.cleaned_data['email'], password=self.cleaned_data['password1'])
 class BookingForm(forms.Form):
-    nameBooking = forms.CharField(label='Họ Và Tên', max_length=30)
-    emailBooking = forms.CharField(label='Email', max_length=30)
-    phoneBooking = forms.CharField(label='Số Điện Thoại', max_length=30)
-    checkInBooking = forms.DateField(label='Ngày')
-    timeBooking = forms.TimeField(label='Thời gian')
-    numberOfGuest = forms.IntegerField(label = 'Số Người')
+    nameBooking = forms.CharField(label='Họ Và Tên', max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Họ và Tên'}))
+    emailBooking = forms.EmailField(label='Email', max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Email'}))
+    phoneBooking = forms.CharField(label='Số Điện Thoại', max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Số Điện Thoại'}))
+    checkInBooking = forms.DateField(label='Ngày', widget=forms.TextInput(attrs={'placeholder': 'Ngày Tháng', 'type':'date'}))
+    timeBooking = forms.TimeField(label='Thời gian', widget=forms.TextInput(attrs={'placeholder': 'Thời gian', 'type':'time'}))
+    numberOfGuest = forms.IntegerField(label = 'Số Người', widget=forms.TextInput(attrs={'placeholder': 'Số Người'}))
     def save(self):
         a = Booking()
         a.nameBooking = self.cleaned_data['nameBooking']
@@ -41,6 +23,7 @@ class BookingForm(forms.Form):
         a.phoneBooking = self.cleaned_data['phoneBooking']
         a.checkInBooking = self.cleaned_data['checkInBooking']
         a.timeBooking = self.cleaned_data['timeBooking']
+        a.numberOfGuest = self.cleaned_data['numberOfGuest']
         a.save()
 class CommentForm (forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -56,3 +39,36 @@ class CommentForm (forms.ModelForm):
     class Meta:
         model = Comment
         fields = ["body"]
+class LoginForm(forms.Form):
+    usernameLoginForm = forms.CharField(label='Username', max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Username'}))
+    passwordLoginForm = forms.CharField(label='Password', max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Password', 'type':'password'}))
+    def login(self):
+        UserLogin = User.objects.get(self.cleaned_data['usernameLoginForm'] == usernameUser)
+        if (UserLogin.passwordUser == self.cleaned_data['passwordLoginForm']):
+            return True
+        else:
+            return False
+class RegisterForm(forms.Form):
+    usernameUser = forms.CharField(label='Username', max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Username'}))
+    passwordUser = forms.CharField(label='Password', max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Password', 'type':'password'}))
+    rePasswordUser = forms.CharField(label='Password', max_length=100, widget=forms.TextInput(attrs={'placeholder': 'RePassword', 'type':'password'}))
+    fullnameUser = forms.CharField(label='Họ Và Tên', max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Họ và Tên'}))
+    phoneUser = forms.CharField(label='Phone', max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Số Điện Thoại'}))
+    emailUser = forms.CharField(label='Email', max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Email'}))
+    def clean_password(self):
+        if (self.cleaned_data['passwordUser'] == self.cleaned_data['rePasswordUser']):
+            return True
+        else:
+            return False
+    def save(self):
+        a = User()
+        a.usernameUser = self.cleaned_data['usernameUser']
+        a.passwordUser = encrypt_string(self.cleaned_data['passwordUser'])
+        a.fullnameUser = self.cleaned_data['fullnameUser']
+        a.dobUser = '1999-01-02'
+        a.addressUSer = 'Hà Nội'
+        a.emailUser = self.cleaned_data['emailUser']
+        a.phoneUser = self.cleaned_data['phoneUser']
+        a.avatarUser = 'images/users/86375348_187159582384515_1906251973686984704_n_491KJzH.jpg'
+        a.statusUser = '1'
+        a.save()
