@@ -23,7 +23,7 @@
           {% for comment in post.comments.all %}
           <li class="comment">
             <div class="vcard bio">
-              <img src="{{user.avatarUser.url}}" alt="Image placeholder">
+              <img src="{{comment.author.avatarUser.url}}" alt="Image placeholder">
             </div>
             <div class="comment-body">
               <h3>{{comment.author}}</h3>

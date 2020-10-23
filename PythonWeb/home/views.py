@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Food, Blog, MasterChef
+from .models import *
 from .forms import *
 import hashlib
 
@@ -29,7 +29,11 @@ def home(request):
             'WineCard':Food.objects.all().filter(nameTypeFood_id= 5),
             'DrinkTea':Food.objects.all().filter(nameTypeFood_id= 6), 
             'DataChef':MasterChef.objects.all(), 
-            'Lunch':Food.objects.all().filter(nameTypeFood_id= 2)})
+            'Lunch':Food.objects.all().filter(nameTypeFood_id= 2),
+            'Review': ReviewCustomer.objects.all(),
+
+            })
+            
     else:
         form = BookingForm()
         if request.method == 'POST':
@@ -47,41 +51,94 @@ def home(request):
             'WineCard':Food.objects.all().filter(nameTypeFood_id= 5),
             'DrinkTea':Food.objects.all().filter(nameTypeFood_id= 6), 
             'DataChef':MasterChef.objects.all(), 
-            'Lunch':Food.objects.all().filter(nameTypeFood_id= 2)})
+            'Lunch':Food.objects.all().filter(nameTypeFood_id= 2),
+            'Review': ReviewCustomer.objects.all()})
 def menu(request):
-    form = BookingForm()
-    if request.method == 'POST':
-        form = BookingForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(request.path)
-    return render(request, 
-                'pages/menu.html',{
-                    'form': form, 
-                    'Breakfast': Food.objects.all().filter(nameTypeFood_id= 1), 
-                    'Dinner':Food.objects.all().filter(nameTypeFood_id= 3), 
-                    'Desserts':Food.objects.all().filter(nameTypeFood_id=4),
-                    'WineCard':Food.objects.all().filter(nameTypeFood_id= 5),
-                    'DrinkTea':Food.objects.all().filter(nameTypeFood_id= 6), 
-                    'Lunch':Food.objects.all().filter(nameTypeFood_id= 2)})
+    if (request.session.get('idUser') != None and request.session.get('idUser') != ''):
+        idUser = request.session.get('idUser')
+        form = BookingForm()
+        if request.method == 'POST':
+            form = BookingForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(request.path)
+        return render(request, 
+                    'pages/menu.html',{
+                        'user': User.objects.get(id=idUser),
+                        'form': form, 
+                        'Breakfast': Food.objects.all().filter(nameTypeFood_id= 1), 
+                        'Dinner':Food.objects.all().filter(nameTypeFood_id= 3), 
+                        'Desserts':Food.objects.all().filter(nameTypeFood_id=4),
+                        'WineCard':Food.objects.all().filter(nameTypeFood_id= 5),
+                        'DrinkTea':Food.objects.all().filter(nameTypeFood_id= 6), 
+                        'Lunch':Food.objects.all().filter(nameTypeFood_id= 2)})
+    else:
+        form = BookingForm()
+        if request.method == 'POST':
+            form = BookingForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(request.path)
+        return render(request, 
+                    'pages/menu.html',{
+                        'user': None,
+                        'form': form, 
+                        'Breakfast': Food.objects.all().filter(nameTypeFood_id= 1), 
+                        'Dinner':Food.objects.all().filter(nameTypeFood_id= 3), 
+                        'Desserts':Food.objects.all().filter(nameTypeFood_id=4),
+                        'WineCard':Food.objects.all().filter(nameTypeFood_id= 5),
+                        'DrinkTea':Food.objects.all().filter(nameTypeFood_id= 6), 
+                        'Lunch':Food.objects.all().filter(nameTypeFood_id= 2)})
 def chef(request):
-    form = BookingForm()
-    if request.method == 'POST':
-        form = BookingForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(request.path)
-    return render(request, 'pages/chef.html', {'form': form,'Chefs': MasterChef.objects.all()})
-def contact(request):
-    return render(request, 'pages/base.html')
+    if (request.session.get('idUser') != None and request.session.get('idUser') != ''):
+        idUser = request.session.get('idUser')
+        form = BookingForm()
+        if request.method == 'POST':
+            form = BookingForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(request.path)
+        return render(request, 'pages/chef.html', {
+            'user': User.objects.get(id=idUser),
+            'form': form,
+            'Chefs': MasterChef.objects.all()})
+    else:
+        form = BookingForm()
+        if request.method == 'POST':
+            form = BookingForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(request.path)
+        return render(request, 'pages/chef.html', {
+            'user': None,
+            'form': form,
+            'Chefs': MasterChef.objects.all()})
 def blog(request):
-    DataBlogs = {'Blogs': Blog.objects.all()}
-    return render(request, 'pages/blog.html', DataBlogs)
+    if (request.session.get('idUser') != None and request.session.get('idUser') != ''):
+        idUser = request.session.get('idUser')
+        DataBlogs = {'Blogs': Blog.objects.all(), 'user': User.objects.get(id=idUser)}
+        return render(request, 'pages/blog.html', DataBlogs)
+    else:
+        DataBlogs = {'Blogs': Blog.objects.all(), 'user': None}
+        return render(request, 'pages/blog.html', DataBlogs)
 def blogsingle(request, id):
     DataBlogSingle = {'BlogSingle': Blog.objects.get(id=id)}
     return render(request, 'pages/blogsingle.html', DataBlogSingle)
 def about(request):
-    return render(request, 'pages/about.html')
+    if (request.session.get('idUser') != None and request.session.get('idUser') != ''):
+        idUser = request.session.get('idUser')
+        return render(request, 'pages/about.html', {
+            'user': User.objects.get(id=idUser),
+            'Review': ReviewCustomer.objects.all(),
+            'CountFood': Food.objects.count(), 
+            'CountChef': MasterChef.objects.count()})
+    else:
+        return render(request, 'pages/about.html', {
+            'user': None,
+            'Review': ReviewCustomer.objects.all(),
+            'CountFood': Food.objects.count(), 
+            'CountChef': MasterChef.objects.count()})
+
 def register(request):
     form = RegisterForm()
     if request.method == 'POST':
@@ -109,7 +166,7 @@ def login(request):
                 return HttpResponseRedirect('/login')
     return render(request, 'pages/login-2.html',{"form":form})
 def post(request, pk):
-    if (request.session.get('idUser') != None):
+    if (request.session.get('idUser') != None and request.session.get('idUser') != ''):
         idUser = request.session.get('idUser')
         post = get_object_or_404(Blog, pk=pk)
         form = CommentForm()
@@ -118,11 +175,24 @@ def post(request, pk):
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect(request.path)
-    return render(request, "pages/blogsingle.html", {
-        'user': User.objects.get(id=idUser),
-        "post": post, 
-        "form": form, 
-        'BlogSingle': Blog.objects.get(id=pk)})
+        return render(request, "pages/blogsingle.html", {
+            'user': User.objects.get(id=idUser),
+            "post": post, 
+            "form": form, 
+            'BlogSingle': Blog.objects.get(id=pk)})
+    else:
+        post = get_object_or_404(Blog, pk=pk)
+        form = CommentForm()
+        if request.method == "POST":
+            form = CommentForm(request.POST, author=User.objects.get(id=idUser), post=post)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(request.path)
+        return render(request, "pages/blogsingle.html", {
+            'user': None,
+            "post": post, 
+            "form": form, 
+            'BlogSingle': Blog.objects.get(id=pk)})
 def logout(request):
     if (request.session.get('idUser') != ''):
         request.session['idUser'] = ''

@@ -24,6 +24,9 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ['usernameUser','fullnameUser','dobUser','emailUser','addressUSer','phoneUser','avatarUser','statusUser']
     search_fields = ['fullnameUser']
     list_filter = ['statusUser']
+class ReviewCustomerAdmin(admin.ModelAdmin):
+    list_display = ['author','reviewContent']
+    search_fields = ['author']
 admin.site.register(Booking, BookingAdmin)
 admin.site.register(Food, FoodAdmin)
 admin.site.register(MasterChef, MasterChefAdmin)
@@ -31,3 +34,4 @@ admin.site.register(Blog, BlogAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(TypeFood, TypeFoodAdmin)
 admin.site.register(User, UserAdmin)
+admin.site.register(ReviewCustomer, ReviewCustomerAdmin)

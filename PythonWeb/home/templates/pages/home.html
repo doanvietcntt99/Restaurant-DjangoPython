@@ -8,7 +8,7 @@
 					
 					<form method="POST" class="appointment-form ">
 						{% csrf_token %}
-						<h3 class="mb-3 ">Book your Table</h3>
+						<h3 class="mb-3 ">Đặt Bàn</h3>
 						<div class="row ">
 							<div class="col-md-12 ">
 								<div class="form-group ">
@@ -52,7 +52,7 @@
 							
 							<div class="col-md-12 ">
 								<div class="form-group ">
-									<input type='submit' value="Book Your Table Now" class="btn btn-white py-3 px-4 ">
+									<input type='submit' value="Đặt Bàn Ngay" class="btn btn-white py-3 px-4 ">
 								</div>
 							</div>
 						</div>
@@ -63,12 +63,12 @@
 						<div class="col-md-12 col-lg-7 ">
 							<div class="heading-section mt-5 mb-4 ">
 								<div class="pl-lg-3 ml-md-5 ">
-									<span class="subheading ">About</span>
-									<h2 class="mb-4 ">Welcome to Taste.it</h2>
+									<span class="subheading ">Về Chúng Tôi</span>
+									<h2 class="mb-4 ">Chào Mừng bạn tới Nhà Hàng</h2>
 								</div>
 							</div>
 							<div class="pl-lg-3 ml-md-5 ">
-								<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and " and the Little Blind Text should turn around and return to its own, safe country. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+								<p>Tọa lạc trên khu đất rộng 2000m2, nhà hàng chia làm 3 khu nhà sàn lớn với kiến trúc độc đáo riêng biệt, hòa cùng quần thể cây cảnh và cây xanh hàng trăm năm tuổi, non bộ nhân tạo và hồ cá cảnh nhiều màu sắc tạo nên một không gian non nước hữu tình, một sự kết hợp hoàn hảo giữa lòng thành phố.</p>
 							</div>
 						</div>
 					</div>
@@ -82,8 +82,8 @@
 		<div class="container ">
 			<div class="row ">
 				<div class="col-md-12 text-center ">
-					<span>Now Booking</span>
-					<h2>Private Dinners &amp; Happy Hours</h2>
+					<span>Đặt Trước Ngay Bây Giờ</span>
+					<h2>Bữa Tối Riêng Tư &amp; Thời Gian Vui Vẻ</h2>
 				</div>
 			</div>
 		</div>
@@ -93,15 +93,15 @@
 		<div class="container ">
 			<div class="row justify-content-center mb-5 pb-2 ">
 				<div class="col-md-7 text-center heading-section ftco-animate ">
-					<span class="subheading ">Specialties</span>
-					<h2 class="mb-4 ">Our Menu</h2>
+					<span class="subheading ">Đặc Sản</span>
+					<h2 class="mb-4 ">Thực Đơn</h2>
 				</div>
 			</div>
 			<div class="row ">
 				<div class="col-md-6 col-lg-4 ">
 					<div class="menu-wrap ">
 						<div class="heading-menu text-center ftco-animate ">
-							<h3>Breakfast</h3>
+							<h3>Bữa Sáng</h3>
 						</div>
 						
 						{% for food in Breakfast %}
@@ -129,7 +129,7 @@
 				<div class="col-md-6 col-lg-4 ">
 					<div class="menu-wrap ">
 						<div class="heading-menu text-center ftco-animate ">
-							<h3>Lunch</h3>
+							<h3>Bữa Trưa</h3>
 						</div>
 						{% for food in Lunch %}
 						<div class="menus border-bottom-0 d-flex ftco-animate ">
@@ -155,7 +155,7 @@
 				<div class="col-md-6 col-lg-4 ">
 					<div class="menu-wrap ">
 						<div class="heading-menu text-center ftco-animate ">
-							<h3>Dinner</h3>
+							<h3>Bữa Tối</h3>
 						</div>
 						{% for food in Dinner %}
 						<div class="menus border-bottom-0 d-flex ftco-animate ">
@@ -166,7 +166,7 @@
 										<h3>{{food.nameFood}}</h3>
 									</div>
 									<div class="one-forth ">
-										<span class="price ">${{food.payFood}}</span>
+										<span class="price ">{{food.payFood}}</span>
 									</div>
 								</div>
 								<p>{{food.ingredientFood}}</p>
@@ -182,7 +182,7 @@
 				<div class="col-md-6 col-lg-4 ">
 					<div class="menu-wrap ">
 						<div class="heading-menu text-center ftco-animate ">
-							<h3>Desserts</h3>
+							<h3>Tráng Miệng</h3>
 						</div>
 						{% for food in Desserts %}
 						<div class="menus border-bottom-0 d-flex ftco-animate ">
@@ -193,7 +193,7 @@
 										<h3>{{food.nameFood}}</h3>
 									</div>
 									<div class="one-forth ">
-										<span class="price ">${{food.payFood}}</span>
+										<span class="price ">{{food.payFood}}</span>
 									</div>
 								</div>
 								<p>{{food.ingredientFood}}</p>
@@ -208,7 +208,7 @@
 				<div class="col-md-6 col-lg-4 ">
 					<div class="menu-wrap ">
 						<div class="heading-menu text-center ftco-animate ">
-							<h3>Wine Card</h3>
+							<h3>Rượu</h3>
 						</div>
 						{% for food in WineCard %}
 						<div class="menus border-bottom-0 d-flex ftco-animate ">
@@ -219,7 +219,7 @@
 										<h3>{{food.nameFood}}</h3>
 									</div>
 									<div class="one-forth ">
-										<span class="price ">${{food.payFood}}</span>
+										<span class="price ">{{food.payFood}}</span>
 									</div>
 								</div>
 								<p>{{food.ingredientFood}}</p>
@@ -234,7 +234,7 @@
 				<div class="col-md-6 col-lg-4 ">
 					<div class="menu-wrap ">
 						<div class="heading-menu text-center ftco-animate ">
-							<h3>Drinks &amp; Tea</h3>
+							<h3>Đồ Uống &amp; Trà</h3>
 						</div>
 						{% for food in DrinkTea %}
 						<div class="menus border-bottom-0 d-flex ftco-animate ">
@@ -245,7 +245,7 @@
 										<h3>{{food.nameFood}}</h3>
 									</div>
 									<div class="one-forth ">
-										<span class="price ">${{food.payFood}}</span>
+										<span class="price ">{{food.payFood}}</span>
 									</div>
 								</div>
 								<p>{{food.ingredientFood}}</p>
@@ -266,83 +266,29 @@
 		<div class="container ">
 			<div class="row justify-content-center mb-3 pb-2 ">
 				<div class="col-md-7 text-center heading-section heading-section-white ftco-animate ">
-					<span class="subheading ">Testimony</span>
-					<h2 class="mb-4 ">Happy Customer</h2>
+					<span class="subheading ">Đánh Giá</span>
+					<h2 class="mb-4 ">Khách Hàng</h2>
 				</div>
 			</div>
 			<div class="row ftco-animate justify-content-center ">
 				<div class="col-md-7 ">
 					<div class="carousel-testimony owl-carousel ftco-owl ">
+						{% for review in Review %}
 						<div class="item ">
 							<div class="testimony-wrap text-center ">
 								<div class="text p-3 ">
-									<p class="mb-4 ">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-									<div class="user-img mb-4 " style="background-image: url({% static 'images/person_1.jpg'%}) ">
+									<p class="mb-4 ">{{review.reviewContent}}</p>
+									<div class="user-img mb-4 " style="background-image: url({{review.author.avatarUser.url}}) ">
 										<span class="quote d-flex align-items-center justify-content-center ">
 											<i class="fa fa-quote-left "></i>
 										</span>
 									</div>
-									<p class="name ">John Gustavo</p>
+									<p class="name ">{{review.author.fullnameUser}}</p>
 									<span class="position ">Customer</span>
 								</div>
 							</div>
 						</div>
-						<div class="item ">
-							<div class="testimony-wrap text-center ">
-								<div class="text p-3 ">
-									<p class="mb-4 ">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-									<div class="user-img mb-4 " style="background-image: url({% static 'images/person_1.jpg'%}) ">
-										<span class="quote d-flex align-items-center justify-content-center ">
-											<i class="fa fa-quote-left "></i>
-										</span>
-									</div>
-									<p class="name ">John Gustavo</p>
-									<span class="position ">Customer</span>
-								</div>
-							</div>
-						</div>
-						<div class="item ">
-							<div class="testimony-wrap text-center ">
-								<div class="text p-3 ">
-									<p class="mb-4 ">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-									<div class="user-img mb-4 " style="background-image: url({% static 'images/person_1.jpg'%}) ">
-										<span class="quote d-flex align-items-center justify-content-center ">
-											<i class="fa fa-quote-left "></i>
-										</span>
-									</div>
-									<p class="name ">John Gustavo</p>
-									<span class="position ">Customer</span>
-								</div>
-							</div>
-						</div>
-						<div class="item ">
-							<div class="testimony-wrap text-center ">
-								<div class="text p-3 ">
-									<p class="mb-4 ">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-									<div class="user-img mb-4 " style="background-image: url({% static 'images/person_1.jpg'%}) ">
-										<span class="quote d-flex align-items-center justify-content-center ">
-											<i class="fa fa-quote-left "></i>
-										</span>
-									</div>
-									<p class="name ">John Gustavo</p>
-									<span class="position ">Customer</span>
-								</div>
-							</div>
-						</div>
-						<div class="item ">
-							<div class="testimony-wrap text-center ">
-								<div class="text p-3 ">
-									<p class="mb-4 ">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-									<div class="user-img mb-4 " style="background-image: url({% static 'images/person_1.jpg'%}) ">
-										<span class="quote d-flex align-items-center justify-content-center ">
-											<i class="fa fa-quote-left "></i>
-										</span>
-									</div>
-									<p class="name ">John Gustavo</p>
-									<span class="position ">Customer</span>
-								</div>
-							</div>
-						</div>
+						{% endfor %}
 					</div>
 				</div>
 			</div>
@@ -353,8 +299,8 @@
 		<div class="container ">
 			<div class="row justify-content-center mb-5 pb-2 ">
 				<div class="col-md-7 text-center heading-section ftco-animate ">
-					<span class="subheading ">Chef</span>
-					<h2 class="mb-4 ">Our Master Chef</h2>
+					<span class="subheading ">Đầu Bếp</span>
+					<h2 class="mb-4 ">Bếp Trưởng</h2>
 				</div>
 			</div>	
 			<div class="row ">
@@ -391,11 +337,11 @@
 				</div>
 				<div class="col-md-6 ftco-animate makereservation p-4 p-md-5 ">
 					<div class="heading-section ftco-animate mb-5 ">
-						<span class="subheading ">This is our secrets</span>
-						<h2 class="mb-4 ">Perfect Ingredients</h2>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.
+						<span class="subheading ">Đây là bí mật của chúng tôi</span>
+						<h2 class="mb-4 ">Những Đầu Bếp Hoàn Hảo</h2>
+						<p> Thực đơn của nhà hàng hết sức đa dạng, từ thịt thú rừng của vùng núi Tây Bắc đến hải sản biển tươi sống của mọi miền đất nước. Nhờ quá trình dày công nghiên cứu và khám phá ẩm thực 3 miền, đồng thời thường xuyên cập nhập và đổi mới thực đơn, chúng tôi tự tin đưa đến cho khách hàng những món ăn đặc biệt nhất với hương vị chất lượng cao nhất như : Xôi Chim Vũ Gia, Gỏi Cá Mẹm, Heo Nướng Giả Chồn, Cua Gạch Rang Muối Nước, Ghẹ Nấu Rau Muống...
 						</p>
-						<p><a href="# " class="btn btn-primary ">Learn more</a></p>
+						<p><a href="# " class="btn btn-primary ">Đọc Thêm</a></p>
 					</div>
 				</div>
 			</div>
@@ -406,15 +352,16 @@
 		<div class="container ">
 			<div class="row justify-content-center mb-5 pb-2 ">
 				<div class="col-md-7 text-center heading-section ftco-animate ">
-					<span class="subheading ">Blog</span>
-					<h2 class="mb-4 ">Recent Blog</h2>
+					<span class="subheading ">Bài Viết</span>
+					<h2 class="mb-4 ">Bài Viết Gần Đây</h2>
 				</div>
 			</div>
 			<div class="row ">
 				{% for blog in Blogs %}
+				<a href="/blog/{{blog.id}} ">
 				<div class="col-md-4 ftco-animate ">
 					<div class="blog-entry ">
-						<a href="blog-single.html " class="block-20 " style="background-image: url({% static 'images/image_1.jpg'%}); ">
+						<a href="/blog/{{blog.id}}" class="block-20 " style="background-image: url({% static 'images/image_1.jpg'%}); ">
 						</a>
 						<div class="text px-4 pt-3 pb-4 ">
 							<div class="meta ">
@@ -424,12 +371,13 @@
 							<h3 class="heading "><a href="# ">{{blog.titleBlog}}</a></h3>
 
 							<p class="clearfix ">
-								<a href="/blog/{{blog.id}} " class="float-left read btn btn-primary ">Read more</a>
-								<a href="# " class="float-right meta-chat "><span class="fa fa-comment "></span> 3</a>
+								<a href="/blog/{{blog.id}} " class="float-left read btn btn-primary ">Chi Tiết</a>
+								<a href="/blog/{{blog.id}}" class="float-right meta-chat "><span class="fa fa-comment "></span></a>
 							</p>
 						</div>
 					</div>
 				</div>
+			</a>
 				{% endfor %}
 			</div>
 		</div>
@@ -439,8 +387,8 @@
 		<div class="container py-5 ">
 			<div class="row py-2 ">
 				<div class="col-md-12 text-center ">
-					<h2>We Make Delicious &amp; Nutritious Food</h2>
-					<a href="#BookTable" class="btn btn-white btn-outline-white ">Book A Table Now</a>
+					<h2>Chúng tôi làm món ăn ngon  &amp; bổ dưỡng</h2>
+					<a href="#BookTable" class="btn btn-white btn-outline-white ">Đặt bàn ngay bây giờ!</a>
 				</div>
 			</div>
 		</div>

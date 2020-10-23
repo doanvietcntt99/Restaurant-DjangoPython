@@ -53,3 +53,7 @@ class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
+
+class ReviewCustomer(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    reviewContent = models.TextField()
