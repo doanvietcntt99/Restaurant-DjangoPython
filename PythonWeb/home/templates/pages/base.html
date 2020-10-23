@@ -3,7 +3,9 @@
 
 <head>
     {% load static %}
-    <title>Taste.it</title>
+	{% block title %}
+
+    {%endblock%}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -60,16 +62,10 @@
 			<button class="navbar-toggler " type="button " data-toggle="collapse " data-target="#ftco-nav " aria-controls="ftco-nav " aria-expanded="false " aria-label="Toggle navigation ">
 				<span class="oi oi-menu "></span> Menu
 			</button>
+			{% block menu %}
 
-			<div class="collapse navbar-collapse " id="ftco-nav ">
-				<ul class="navbar-nav ml-auto ">
-					<li class="nav-item active "><a href="/home" class="nav-link ">Trang Chủ</a></li>
-					<li class="nav-item "><a href="/about " class="nav-link ">Về Chúng Tôi</a></li>
-					<li class="nav-item "><a href="/chef " class="nav-link ">Đầu Bếp</a></li>
-					<li class="nav-item "><a href="/menu " class="nav-link ">Món Ăn</a></li>
-					<li class="nav-item "><a href="/blog " class="nav-link ">Bài Viết</a></li>
-				</ul>
-			</div>
+    		{%endblock%}
+			
 		</div>
 	</nav>
 	<!-- END nav -->

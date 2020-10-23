@@ -1,5 +1,19 @@
 {% extends "pages/base.html" %}
 {% load static %}
+{% block title %}
+	<title>Taste.it - Blog Title</title>
+{% endblock %}
+{% block menu %}
+<div class="collapse navbar-collapse " id="ftco-nav ">
+	<ul class="navbar-nav ml-auto ">
+		<li class="nav-item "><a href="/home" class="nav-link ">Trang Chủ</a></li>
+		<li class="nav-item "><a href="/about " class="nav-link ">Về Chúng Tôi</a></li>
+		<li class="nav-item "><a href="/chef " class="nav-link ">Đầu Bếp</a></li>
+		<li class="nav-item "><a href="/menu " class="nav-link ">Món Ăn</a></li>
+		<li class="nav-item active"><a href="/blog " class="nav-link ">Bài Viết</a></li>
+	</ul>
+</div>
+{% endblock %}
 {% block content %}
 
 <section class="ftco-section ">

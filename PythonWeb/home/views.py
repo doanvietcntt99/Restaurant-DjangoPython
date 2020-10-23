@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 from .forms import *
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import hashlib
 
 def encrypt_string(hash_string):
@@ -116,11 +117,27 @@ def chef(request):
 def blog(request):
     if (request.session.get('idUser') != None and request.session.get('idUser') != ''):
         idUser = request.session.get('idUser')
-        DataBlogs = {'Blogs': Blog.objects.all(), 'user': User.objects.get(id=idUser)}
-        return render(request, 'pages/blog.html', DataBlogs)
+        Blog_list =  Blog.objects.all()
+        paginator = Paginator(Blog_list, 6)
+        pageNumber = request.GET.get('page')
+        try:
+            blogs = paginator.page(pageNumber)
+        except PageNotAnInteger:
+            blogs = paginator.page(1)
+        except EmptyPage:
+            blogs = paginator.page(paginator.num_pages)
+        return render(request, 'pages/blog.html', {'user': User.objects.get(id=idUser), 'Blogs' : blogs})
     else:
-        DataBlogs = {'Blogs': Blog.objects.all(), 'user': None}
-        return render(request, 'pages/blog.html', DataBlogs)
+        Blog_list =  Blog.objects.all()
+        paginator = Paginator(Blog_list, 6)
+        pageNumber = request.GET.get('page')
+        try:
+            blogs = paginator.page(pageNumber)
+        except PageNotAnInteger:
+            blogs = paginator.page(1)
+        except EmptyPage:
+            blogs = paginator.page(paginator.num_pages)
+        return render(request, 'pages/blog.html', {'user': None, 'Blogs' : blogs})
 def blogsingle(request, id):
     DataBlogSingle = {'BlogSingle': Blog.objects.get(id=id)}
     return render(request, 'pages/blogsingle.html', DataBlogSingle)
