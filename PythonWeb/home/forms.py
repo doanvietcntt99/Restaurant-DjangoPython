@@ -3,7 +3,7 @@ import re
 from django.contrib.auth.models import User
 from .models import *
 import hashlib
-
+from datetimepicker.widgets import DateTimePicker
 def encrypt_string(hash_string):
     sha_signature = \
         hashlib.sha256(hash_string.encode()).hexdigest()
@@ -72,3 +72,20 @@ class RegisterForm(forms.Form):
         a.avatarUser = 'images/users/86375348_187159582384515_1906251973686984704_n_491KJzH.jpg'
         a.statusUser = '1'
         a.save()
+class UserDetailForm(forms.Form):
+    usernameUser = forms.CharField(label='Username', max_length=100, widget=forms.TextInput(attrs={'value': 'Username'}))
+    fullnameUser = forms.CharField(label='Fullname', max_length=30)
+    dobUser = forms.DateField(label='DOB', widget=DateTimePicker(),)
+    addressUSer = forms.CharField(label='Address')
+    emailUser = forms.CharField(label='Email')
+    phoneUser = forms.CharField(label='Phone', max_length=12)
+    def save(self):
+        a = User.objects.get(usernameUser=self.cleaned_data['usernameUser'])
+        a.fullnameUser = self.cleaned_data['fullnameUser']
+        a.dobUser = self.cleaned_data['dobUser']
+        a.addressUSer = self.cleaned_data['addressUSer']
+        a.emailUser = self.cleaned_data['emailUser']
+        a.phoneUser = self.cleaned_data['phoneUser']
+        a.save()
+
+
