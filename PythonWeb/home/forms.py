@@ -87,5 +87,10 @@ class UserDetailForm(forms.Form):
         a.emailUser = self.cleaned_data['emailUser']
         a.phoneUser = self.cleaned_data['phoneUser']
         a.save()
-
-
+class ReviewCustomerForm(forms.Form):
+    id_author = forms.IntegerField()
+    reviewContent = forms.CharField(label='reviewContent', max_length=50, widget=forms.TextInput(attrs={'style': 'color:white!black'}))
+    def save(self):
+        a = ReviewCustomer()
+        a.author = request.session.get('idUser')
+        a.reviewContent = self.cleaned_data['reviewContent']

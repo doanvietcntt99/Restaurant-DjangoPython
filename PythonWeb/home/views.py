@@ -239,6 +239,7 @@ def accountdetail(request):
         idUser = request.session.get('idUser')
         UserAccount = User.objects.get(id=idUser)
         form = UserDetailForm()
+        form2 = ReviewCustomerForm()
         if request.method == "POST":
             form = UserDetailForm(request.POST)
             if form.is_valid():
@@ -248,4 +249,5 @@ def accountdetail(request):
             return render(request, "pages/accountdetail.html", {
                 'user': User.objects.get(id=idUser), 
                 'form' : form,
-                'booking' : Booking.objects.filter(emailBooking = UserAccount.emailUser)})
+                'booking' : Booking.objects.filter(emailBooking = UserAccount.emailUser),
+                'form2' : form2})
