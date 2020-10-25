@@ -247,4 +247,5 @@ def accountdetail(request):
         else:
             return render(request, "pages/accountdetail.html", {
                 'user': User.objects.get(id=idUser), 
-                'form' : form})
+                'form' : form,
+                'booking' : Booking.objects.filter(emailBooking = UserAccount.emailUser)})
