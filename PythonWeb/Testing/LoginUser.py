@@ -24,7 +24,7 @@ try:
     matkhau.send_keys("admin123")
     loginButton = driver.find_element_by_xpath('/html/body/div/div[2]/form/div[2]/input[3]')
     loginButton.click()
-    # driver.get("http://127.0.0.1:8000/accountdetail")
+    # driver.switch_to_alert().accept()
 except:
     print("Có lỗi xảy ra!")
 time.sleep(30)
