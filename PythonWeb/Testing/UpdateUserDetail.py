@@ -1,0 +1,48 @@
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+import time
+def viewAtritue(self):
+    print('     - Atritute : ', self)
+    print('     - Displayed  : ', self.is_displayed())
+    print('     - Enabled  : ', self.is_enabled())
+    print('     - Selected  :', self.is_selected())
+PATH = "E:\chromedriver.exe"
+driver = webdriver.Chrome(PATH)
+driver.get("http://127.0.0.1:8000/login/")
+time.sleep(2)
+# try:
+taikhoan = driver.find_element_by_name("usernameLoginForm")
+print('taikhoan : ')
+viewAtritue(taikhoan)
+matkhau = driver.find_element_by_name("passwordLoginForm")
+print('matkhau : ')
+viewAtritue(matkhau)
+taikhoan.send_keys("vietdd")
+matkhau.send_keys("admin123")
+loginButton = driver.find_element_by_xpath('/html/body/div/div[2]/form/div[2]/input[3]')
+print('loginButton : ')
+viewAtritue(loginButton)
+loginButton.click()
+driver.get("http://127.0.0.1:8000/accountdetail")
+UsernameUpdate = driver.find_element_by_name("fullnameUser")
+UsernameUpdate.clear()
+UsernameUpdate.send_keys("Phạm Nam Phương")
+dobUserUpdate = driver.find_element_by_name("dobUser")
+dobUserUpdate.clear()
+dobUserUpdate.send_keys("05/10/2020")
+addressUserUpdate = driver.find_element_by_name("addressUSer")
+addressUserUpdate.clear()
+addressUserUpdate.send_keys("Thanh Hóa")
+emailUserUpdate = driver.find_element_by_name("emailUser")
+emailUserUpdate.clear()
+emailUserUpdate.send_keys("phuongpn@gmail.com")
+phoneUserUpdate = driver.find_element_by_name("phoneUser")
+phoneUserUpdate.clear()
+phoneUserUpdate.send_keys("0986678636")
+buttonUpdate = driver.find_element_by_xpath("/html/body/div[2]/div[2]/div[2]/div/form/div/input[2]")
+buttonUpdate.click()
+# except:
+#     print("Có lỗi xảy ra!")
+time.sleep(30)
+driver.quit()

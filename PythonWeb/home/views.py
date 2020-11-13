@@ -136,7 +136,7 @@ def blog(request):
     if (request.session.get('idUser') != None and request.session.get('idUser') != ''):
         idUser = request.session.get('idUser')
         Blog_list =  Blog.objects.all()
-        paginator = Paginator(Blog_list, 6)
+        paginator = Paginator(Blog_list, 2)
         pageNumber = request.GET.get('page')
         try:
             blogs = paginator.page(pageNumber)
@@ -147,7 +147,7 @@ def blog(request):
         return render(request, 'pages/blog.html', {'user': User.objects.get(id=idUser), 'Blogs' : blogs})
     else:
         Blog_list =  Blog.objects.all()
-        paginator = Paginator(Blog_list, 6)
+        paginator = Paginator(Blog_list, 2)
         pageNumber = request.GET.get('page')
         try:
             blogs = paginator.page(pageNumber)

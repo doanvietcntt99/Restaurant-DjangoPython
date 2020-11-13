@@ -38,9 +38,9 @@
                     <p class="mb-0">
                     {% if user != None %}
                         <p>Xin chào <a href="/accountdetail">{{user.fullnameUser}}&nbsp&nbsp&nbsp</a> </p>
-                        <p><a href="/logout" url 'logout' %} ">Đăng xuất</a></p>
+                        <p><a href="/logout" url 'logout' name="logout" %} ">Đăng xuất</a></p>
 					{% else %}
-						<p><a href="/register " url 'register' %}">Đăng ký</a>|<a href="/login" url 'login' %} ">Đăng nhập</a></p>
+						<p><a href="/register " url 'register' name="register" %}">Đăng ký</a>|<a href="/login" name="login" url 'login' %}">Đăng nhập</a></p>
 					{% endif %}
 				</p>
 					<div class="social-media ">

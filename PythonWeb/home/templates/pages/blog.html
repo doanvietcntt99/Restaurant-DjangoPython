@@ -41,7 +41,7 @@
           </div>
           <h3 class="heading "><a href="# ">{{blog.titleBlog}}</a></h3>
           <p class="clearfix ">
-            <a href="/blog/{{blog.id}} " class="float-left read btn btn-primary ">Read more</a>
+            <a href="/blog/{{blog.id}} " class="float-left read btn btn-primary ">Chi Tiết</a>
             <a href="# " class="float-right meta-chat "><span class="fa fa-comment "></span>3</a>
           </p>
         </div>
@@ -59,7 +59,7 @@
           <li class="active"><span>{{ Blogs.number }}</span></li>
           {% if Blogs.has_next %}
           <li><a href="?page={{ Blogs.next_page_number }}">&gt;</a></li>
-          <li><a href="?page={{ Blogs.paginator.num_pages }}"><span>{{ Blogs.paginator.num_pages }}</span></a></li>
+          <li><a href="?page={{ Blogs.paginator.num_pages }}">{{ Blogs.paginator.num_pages }}</a></li>
           {% endif %}
           
         </ul>
