@@ -139,6 +139,3 @@ class TestLoginUser():
         self.driver.find_element_by_name("avatarBlog").send_keys("C://Users/doanv/OneDrive/Máy tính/BichMT.jpg")
         self.driver.find_element_by_xpath('//*[@id="blog_form"]/div/div/input[1]').click()
         assert self.driver.title=="Select blog to change | Django site admin"
-
-
-    
