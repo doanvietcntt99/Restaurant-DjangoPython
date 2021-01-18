@@ -193,12 +193,17 @@ def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
-            UserLogin = User.objects.get(usernameUser = form.cleaned_data['usernameLoginForm'])
-            if (UserLogin.passwordUser == encrypt_string(form.cleaned_data['passwordLoginForm'])):
-                request.session['idUser'] = UserLogin.id
-                return HttpResponseRedirect('/home')
-            else:
+            try:
+                UserLogin = User.objects.get(usernameUser = form.cleaned_data['usernameLoginForm'])
+                if (UserLogin.passwordUser == encrypt_string(form.cleaned_data['passwordLoginForm'])):
+                    request.session['idUser'] = UserLogin.id
+                    return HttpResponseRedirect('/home')
+                else:
+                    return HttpResponseRedirect('/login')
+            except:
                 return HttpResponseRedirect('/login')
+
+            
     return render(request, 'pages/login-2.html',{"form":form})
 def post(request, pk):
     if (request.session.get('idUser') != None and request.session.get('idUser') != ''):
